@@ -2,25 +2,21 @@ pipeline {
     agent any
 
     stages {
-
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t vedik007/myapp .'
+                sh 'docker build -t vedik007/myapp .'
             }
         }
-
         stage('Push Docker Image') {
             steps {
-                bat 'docker push vedik007/myapp'
+                sh 'docker push vedik007/myapp'
             }
         }
-
         stage('Deploy to Kubernetes') {
             steps {
-                bat 'kubectl apply -f deployment.yaml'
-                bat 'kubectl apply -f service.yaml'
+                sh 'kubectl apply -f deployment.yaml'
+                sh 'kubectl apply -f service.yaml'
             }
         }
-
     }
 }
